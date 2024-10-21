@@ -1,0 +1,3 @@
+https://40.82.214.47 {
+    reverse_proxy localhost:8000
+}
