@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request, url_for
+from flask import render_template, redirect, request
 from datetime import datetime
 from app import app, db
 from models import Expense
@@ -19,19 +19,19 @@ def add_expense():
     db.session.add(new_expense)
     db.session.commit()
 
-    return redirect(url_for('index'))
+    return redirect('/index')
 
 # Delete an expense
-@app.route('/delete/<int:id>')
+@app.route('/delete/<id>')
 def delete_expense(id):
     expense = Expense.query.get_or_404(id)
     db.session.delete(expense)
     db.session.commit()
     
-    return redirect(url_for('index'))
+    return redirect('/index')
 
 # Update an expense
-@app.route('/update/<int:id>', methods=['GET', 'POST'])
+@app.route('/update/<id>', methods=['GET', 'POST'])
 def update_expense(id):
     expense = Expense.query.get_or_404(id)
 
@@ -41,6 +41,6 @@ def update_expense(id):
         expense.date = datetime.strptime(request.form['date'], '%Y-%m-%d')
         
         db.session.commit()
-        return redirect(url_for('index'))
+        return redirect('/index')
     
     return render_template('update.html', expense=expense)
