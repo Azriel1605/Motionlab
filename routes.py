@@ -19,7 +19,7 @@ def add_expense():
     db.session.add(new_expense)
     db.session.commit()
 
-    return redirect('/index')
+    return redirect('/')
 
 # Delete an expense
 @app.route('/delete/<id>')
@@ -28,7 +28,7 @@ def delete_expense(id):
     db.session.delete(expense)
     db.session.commit()
     
-    return redirect('/index')
+    return redirect('/')
 
 # Update an expense
 @app.route('/update/<id>', methods=['GET', 'POST'])
@@ -41,6 +41,6 @@ def update_expense(id):
         expense.date = datetime.strptime(request.form['date'], '%Y-%m-%d')
         
         db.session.commit()
-        return redirect('/index')
+        return redirect('/')
     
     return render_template('update.html', expense=expense)
