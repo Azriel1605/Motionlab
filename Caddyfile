@@ -1,3 +1,3 @@
-http://20.205.140.207 {
+http://catatanpengeluaran.eastasia.cloudapp.azure.com {
     reverse_proxy localhost:8000
 }
