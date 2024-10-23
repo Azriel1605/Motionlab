@@ -3,13 +3,13 @@ from datetime import datetime
 from app import app, db
 from models import Expense
 
-@app.route('/')
+@app.route('/') # Main page
 def index():
     expenses = Expense.query.all()
     return render_template('index.html', expenses=expenses)
 
-# Add a new expense
-@app.route('/add', methods=['POST'])
+
+@app.route('/add', methods=['POST']) # add route
 def add_expense():
     name = request.form['expense_name']
     amount = float(request.form['amount'])
@@ -21,8 +21,8 @@ def add_expense():
 
     return redirect('/')
 
-# Delete an expense
-@app.route('/delete/<id>')
+
+@app.route('/delete/<id>') # delete route
 def delete_expense(id):
     expense = Expense.query.get_or_404(id)
     db.session.delete(expense)
@@ -30,8 +30,7 @@ def delete_expense(id):
     
     return redirect('/')
 
-# Update an expense
-@app.route('/update/<id>', methods=['GET', 'POST'])
+@app.route('/update/<id>', methods=['GET', 'POST']) # update route
 def update_expense(id):
     expense = Expense.query.get_or_404(id)
 
